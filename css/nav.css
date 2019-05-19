@@ -1,0 +1,55 @@
+/*nav start*/
+/* 公共容器1200px */
+.content-wrapper {
+  width: 1200px;
+  margin: 0 auto;
+  font-size: 0;
+}
+.padding-rt-66 {
+  padding-right: 66px;
+}
+/* 子栏目页的导航栏*/
+.nav-bg {
+  background: url("../img/banner1.png") no-repeat center;
+  height: 140px;
+}
+.nav-menu {
+  width: 100%;
+  height: 60px;
+  background-color: #2776d0;
+}
+.nav-menu .nav-home {
+  color: #fff !important;
+  vertical-align: bottom;
+  padding-right: 68px;
+}
+.nav-menu ul li {
+  display: inline-block;
+  line-height: 60px;
+  vertical-align: middle;
+}
+.nav-menu ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+.nav-menu ul li a h6 {
+  display: inline-block;
+  opacity: 0.3;
+  font-size: 18px;
+  color: #FFFFFF;
+  margin-right: 75px;
+}
+.nav-menu ul li a img {
+  vertical-align: middle;
+}
+.nav-menu ul li a span {
+  display: inline-block;
+  font-size: 18px;
+  padding-left: 8px;
+  vertical-align: bottom;
+}
+.nav-menu ul li a:hover {
+  color: #fea911;
+}
+/* nav end*/
+/*# sourceMappingURL=nav.css.map */

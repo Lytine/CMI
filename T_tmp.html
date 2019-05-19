@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="plugins/drop-down/drop-down.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="plugins/drop-down/jquery-ui.min.js"></script>
+    <script src="plugins/drop-down/select-widget-min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".ui-select").selectWidget({
+                change: function (changes) {
+                    return changes;
+                },
+                effect: "slide",
+                keyControl: true,
+                speed: 200,
+                scrollHeight: 250
+            });
+        });
+    </script>
+</head>
+
+<body>
+<select name="drop1" class="ui-select">
+    <option value="">不限</option>
+    <option value="1" selected>竞价公告</option>
+    <option value="2">结果公告</option>
+    <option value="3">更正公告</option>
+    <option value="4">调研公告</option>
+    <option value="5">废标公告</option>
+</select>
+</body>
+
+
+</html>

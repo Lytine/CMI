@@ -1,0 +1,188 @@
+body {
+    position: relative;
+}
+
+a {
+    text-decoration: none;
+    color:#333;
+}
+a:hover {
+    color: #000;
+}
+
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/*悬浮链接*/
+.suspension {
+    position: fixed;
+    z-index: 55;
+    right: 0;
+    top: 220px;
+    width: 70px;
+    height: 240px;
+}
+
+.suspension-box {
+    position: relative;
+    float: right;
+}
+
+.suspension .a {
+    display: block;
+    width: 60px;
+    height: 60px;
+    background-color: #2776d0;
+    margin-bottom: 2px;
+    cursor: pointer;
+    outline: none;
+}
+
+.suspension .a.active,
+.suspension .a:hover {
+    background: #2168b8;
+}
+
+.suspension .a-top {
+    background: #D2D3D6;
+    display: none;
+}
+
+.suspension .a-top:hover {
+    background: #c0c1c3;
+}
+
+.suspension .d {
+    display: none;
+    width: 210px;
+    background: #fff;
+    position: absolute;
+    right: 67px;
+    min-height: 70px;
+    border: 1px solid #E0E1E5;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px 0 rgba(161, 163, 175, 0.11);
+}
+
+.suspension .d .arrow {
+    position: absolute;
+    width: 8px;
+    height: 12px;
+    background: url(../img/suspension/side_bg_arrow.png) no-repeat;
+    right: -8px;
+    top: 31px;
+}
+
+.suspension .d-service {
+    top: 0;
+}
+
+.suspension .d-service-phone {
+    top: 60px;
+}
+
+.suspension .d-qrcode {
+    top: 120px;
+}
+
+.suspension .d .inner-box {
+    padding: 8px 0 8px 20px;
+}
+
+.suspension .d-service-item {
+    padding-top:5px;
+}
+
+.suspension .d-service .d-service-item {
+    border-bottom: none;
+}
+
+.suspension .d-service-item .circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #F1F1F3;
+    display: block;
+    float: left;
+}
+
+.suspension .d-service-item .i-qq {
+    width: 44px;
+    height: 44px;
+    background: url(../img/suspension/side_con_icon03.png) no-repeat center 15px;
+    display: block;
+    transition: all .2s;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.suspension .d-service-item:hover .i-qq {
+    background-position: center 3px;
+}
+
+.suspension .d-service-item .i-tel {
+    width: 44px;
+    height: 44px;
+    background: url(../img/suspension/side_con_icon02.png) no-repeat center center;
+    display: block;
+}
+
+.suspension .d-service-item h3 {
+    float: left;
+    width: 120px;
+    line-height: 44px;
+    font-size: 15px;
+    margin-left: 6px;
+}
+
+.suspension .d-service-item .text {
+    float: left;
+    width: 130px;
+    line-height: 20px;
+    font-size: 15px;
+    margin-left: 6px;
+}
+
+.suspension .d-qrcode {
+    text-align: center;
+}
+
+.suspension .d-qrcode .inner-box {
+    padding: 5px 0 0;
+}
+
+.suspension-box .a-service {
+    background: url("../img/suspension/qq.png");
+}
+
+.suspension-box .a-service:hover {
+    background: url("../img/suspension/qq-hover.png");
+}
+
+.suspension-box .a-service-phone {
+    background: url("../img/suspension/phone.png");
+}
+
+.suspension-box .a-service-phone:hover {
+    background: url("../img/suspension/phone-hover.png");
+}
+
+.suspension-box .a-qrcode {
+    background: url("../img/suspension/code.png");
+}
+
+.suspension-box .a-qrcode:hover {
+    background: url("../img/suspension/code-hover.png");
+}
+
+.suspension .a-top {
+    background: url("../img/suspension/up.png");
+}
+
+.suspension .a-top:hover {
+    background: url("../img/suspension/up-hover.png");
+}

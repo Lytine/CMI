@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="lytine-progress.css" rel="stylesheet">
+</head>
+<body>
+<div id="app">
+    <lytine-progress :progress="0" :height="10" :time-start="getPeriod(obj).start" :time-end="getPeriod(obj).end"></lytine-progress>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script src="lytine-progress.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      obj: {
+        "Id": 2095,
+        "ProjectId": "625fd020-f470-476f-9ea2-03d0db46092d",
+        "NoticeDate": "2017-12-13T17:07:52.000Z",
+        "NoticeType": "0",
+        "CompanyId": "510F06AD-E16D-432C-9B7A-A80800C8FEB2",
+        "Title": "测试项目竞价公告",
+        "Content": "null",
+        "State": "2",
+        "PublicId": 197,
+        "Url": "http://oa.chinapsp.cn:8097/WebReport/ReportServer?reportlet=newcailian%2Fgonggao%2FzhaobiaoReport.cpt&Id=625fd020-f470-476f-9ea2-03d0db46092d",
+        "IfOpen": 1,
+        "CheckState": "3",
+        "F_FullName": "代理公司1",
+        "Project_Name": "测试项目",
+        "ApplyFromTime": "2019-05-14T08:30:00.000Z",
+        "ApplyToTime": "2019-05-15T10:30:00.000Z",
+        "UppriceFromTime": "2019-05-19T10:30:00.000Z",
+        "UppriceToTime": "2019-05-19T19:30:00.000Z",
+        "AddTime": "2019-05-13T15:11:07.000Z",
+        "Purchase_Name": "采购人公司1",
+        "platformUrl": "http://e.chinapsp.cn/newtest/",
+        "platformName": "试用平台",
+        "IfShowNotice": 0,
+        "Project_Budget": 50000,
+        "PSP_UpPriceViews": [
+          {
+            "id": "625fd020-f470-476f-9ea2-03d0db46092d",
+            "GroupId": null,
+            "Price": 42000,
+            "AddTime": "2017-12-14T11:13:37.000Z",
+            "Items": null,
+            "Winbid": 1,
+            "Id": "625fd020-f470-476f-9ea2-03d0db46092d",
+            "DownloadUrl": null,
+            "FileName": null,
+            "PriceRule": 2,
+            "UpNum": 0,
+            "UppriceId": "0e613036-41ef-4496-b88e-08bf194b8828",
+            "UserId": "749E061B-3D57-4C80-8E1F-436373FB8711",
+            "Contact": "供应商三号",
+            "ContactMobile": "12345678654",
+            "ContactEmail": "2333@qq.com",
+            "F_FullName": "供应商测试公司3",
+            "BitcatId": "197",
+            "Project_Name": "测试项目",
+            "AliossId": null
+          }
+        ]
+      }
+    },
+    methods: {
+      getPeriod(bid) {
+        const MILLIS_OF_8_HOURS = 8 * 60 * 60 * 1000;
+
+        let result = {
+          start: 0,
+          end: 0,
+        };
+        let status = this.getStatus(bid);
+        let noticeDate = new Date(bid.NoticeDate).getTime() - MILLIS_OF_8_HOURS;
+
+        if (status === 0) {
+          result.start = noticeDate;
+          result.end = new Date(bid.ApplyFromTime).getTime() - MILLIS_OF_8_HOURS;
+        } else if (status === 1) {
+          result.start = new Date(bid.ApplyFromTime).getTime() - MILLIS_OF_8_HOURS;
+          result.end = new Date(bid.ApplyToTime).getTime() - MILLIS_OF_8_HOURS;
+        } else if (status === 2) {
+          result.start = new Date(bid.ApplyToTime).getTime() - MILLIS_OF_8_HOURS;
+          result.end = new Date(bid.UppriceFromTime).getTime() - MILLIS_OF_8_HOURS;
+        } else if (status === 3) {
+          result.start = new Date(bid.UppriceFromTime).getTime() - MILLIS_OF_8_HOURS;
+          result.end = new Date(bid.UppriceToTime).getTime() - MILLIS_OF_8_HOURS;
+        }
+        return result;
+      },getStatus: function (bid) { //获取竞价公告的各个时间段
+        const MILLIS_OF_8_HOURS = 8 * 60 * 60 * 1000;
+
+        let currentTime = new Date().getTime();
+        let applyTimeBegin = new Date(bid.ApplyFromTime).getTime() - MILLIS_OF_8_HOURS;
+        let applyTimeEnd = new Date(bid.ApplyToTime).getTime() - MILLIS_OF_8_HOURS;
+        let uppriceTimeBegin = new Date(bid.UppriceFromTime).getTime() - MILLIS_OF_8_HOURS;
+        let uppriceTimeEnd = new Date(bid.UppriceToTime).getTime() - MILLIS_OF_8_HOURS;
+        if (currentTime < applyTimeBegin) {
+          return 0;
+        } else if (applyTimeBegin < currentTime && currentTime <= applyTimeEnd) {
+          return 1;
+        } else if (applyTimeEnd < currentTime && currentTime <= uppriceTimeBegin) {
+          return 2;
+        } else if (uppriceTimeBegin < currentTime && currentTime <= uppriceTimeEnd) {
+          return 3;
+        } else if (currentTime > uppriceTimeEnd) {
+          return 4;
+        }
+      }
+
+    }
+  })
+</script>
+</body>
+</html>

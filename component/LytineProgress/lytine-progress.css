@@ -1,0 +1,52 @@
+.lytine-progress {
+  border: none;
+  border-radius: 25px;
+  position: relative;
+}
+.lytine-progress .fill-left {
+  height: 100%;
+  border: inherit;
+  border-radius: 25px 0 0 25px;
+}
+.lytine-progress .fill-right {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: inherit;
+  float: right;
+  border-radius: 0 25px 25px 0;
+}
+.tag {
+  display: inline-block;
+  border: 1px solid #e8e8e8;
+  border-radius: 25px;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: #41332D;
+  background-color: white;
+  position: relative;
+  text-align: center;
+  transform: translate(-50%, 0);
+  margin-bottom: 6px;
+  z-index: 999;
+}
+.tag:before,
+.tag:after {
+  content: "";
+  display: block;
+  border-width: 5px;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border-style: solid dashed dashed;
+  border-color: #e8e8e8 transparent transparent;
+  font-size: 0;
+  line-height: 0;
+}
+.tag:after {
+  bottom: -8px;
+  border-color: #FFF transparent transparent;
+}
+/*# sourceMappingURL=lytine-progress.css.map */

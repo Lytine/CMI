@@ -1,0 +1,57 @@
+/* 分页条样式重写*/
+.bids-page {
+  text-align: center;
+  height: 28px;
+  line-height: 28px;
+  font-size: 0;
+  color: rgba(0, 0, 0, 0.65);
+  margin: 50px 0 30px 0;
+}
+.el-pagination {
+  font-weight: 200 !important;
+  display: inline-block;
+  padding: 0;
+}
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: #2576D2 !important;
+  border: 1px #2576D2 solid;
+}
+.el-pagination.is-background .btn-next,
+.el-pagination.is-background .btn-prev,
+.el-pagination.is-background .el-pager li {
+  margin: 0 5px;
+  background-color: #fff !important;
+  min-width: 28px !important;
+  border-radius: 4px !important;
+  border: 1px #d9d9d9 solid;
+}
+.el-pagination.is-background .el-pager li:not(.disabled):hover {
+  color: #fff !important;
+  background-color: #2576D2 !important;
+  border: 1px #2576D2 solid !important;
+}
+.el-pagination button,
+.el-pagination span:not([class*=suffix]) {
+  font-size: 12px;
+}
+.el-pagination__editor.el-input .el-input__inner {
+  border: 1px solid #D9D9D9;
+  border-radius: 4px !important;
+}
+.bids-page .jump {
+  display: inline-block;
+  background: #F2F2F2;
+  border: 1px solid #D9D9D9;
+  border-radius: 4px;
+  outline: none;
+  width: 48px;
+  height: 28px;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 12px;
+  margin-left: 10px;
+}
+.jump:hover {
+  background-color: #2576D2;
+  color: #fff;
+}
+/*# sourceMappingURL=pagination.css.map */

@@ -1,0 +1,131 @@
+[v-cloak] {
+  display: none;
+}
+body {
+  background: #ededed;
+}
+/*公共样式*/
+.margin-lf-10 {
+  margin-left: 10px;
+}
+.margin-rt-10 {
+  margin-right: 10px;
+}
+.margin-lf-20 {
+  margin-left: 20px;
+}
+.margin-bt-20 {
+  margin-bottom: 20px;
+}
+.padding-rt-0 {
+  padding-right: 0;
+}
+button {
+  outline: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+/* 公共容器1200px */
+.content-wrapper {
+  width: 1200px;
+  margin: 0 auto;
+  font-size: 0;
+}
+/* content start*/
+/* 搜索面板*/
+.search-panel {
+  background-color: white;
+  margin-top: 20px;
+}
+.search-panel .tab {
+  height: 59px;
+  border-bottom: 1px solid #ededed;
+}
+.search-panel .tab li {
+  height: 59px;
+  display: inline-block;
+  padding: 15px 15px 0 17px;
+}
+.search-panel .tab li a {
+  font-size: 18px;
+  color: #333;
+}
+.search-panel .tab li a:hover,
+.search-panel .tab li .active {
+  font-size: 24px;
+  color: #2967CF;
+  font-weight: bold;
+}
+.search-panel .tab li:hover {
+  height: 42px;
+  border-bottom: 3px solid #2967CF;
+}
+.search {
+  line-height: 58px;
+  margin-left: 17px;
+}
+.search .project-name {
+  display: inline-block;
+}
+.search .project-name input {
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  width: 250px;
+  height: 26px;
+  padding: 0 10px;
+  margin-left: 10px;
+}
+.search h6 {
+  display: inline-block;
+  font-size: 14px;
+  color: #333;
+}
+.search .publish-date {
+  display: inline-block;
+  margin-left: 17px;
+}
+.search .search-btn {
+  background: #2967CF;
+  border-radius: 2px;
+  width: 62px;
+  height: 28px;
+  color: #fff;
+  margin-left: 20px;
+  outline: none;
+  border: none;
+}
+.search .search-btn:hover {
+  background: #255DBA;
+  cursor: pointer;
+}
+/*elementui的日期重写*/
+.el-input__icon {
+  line-height: 30px !important;
+}
+.el-date-editor.el-input,
+.el-date-editor.el-input__inner {
+  width: 275px !important;
+  margin-left: 10px;
+}
+.el-input__inner {
+  border-radius: 2px;
+  height: 28px !important;
+}
+/* content end*/
+/* footer start*/
+.footer-wrapper {
+  background: #373737;
+  text-align: center;
+  font-size: 12px;
+  height: 97px;
+  color: #999999;
+  line-height: 17px;
+  padding-top: 30px;
+}
+.footer-wrapper a {
+  color: #4A90E2;
+  font-size: 12px;
+}
+/* footer end*/
+/*# sourceMappingURL=T_notice.css.map */

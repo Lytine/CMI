@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>采联军民融合-政策法规</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/T_policy.css">
+</head>
+<body>
+
+<!--nav start-->
+<div class="nav-bar-wrapper" id="nav-app">
+    <div class="nav-bg">
+        <div class="content-wrapper">
+            <img src="img/logo.png" style="padding-top:40px;"/></div>
+    </div>
+    <div class="nav-menu" id="navMenu">
+        <ul class="content-wrapper">
+            <li style="margin-left:30px;">
+                <a href="#">
+                    <img src="img/home.png" alt="首页">
+                    <span class="nav-home">首页</span>
+                </a>
+            </li>
+            <li v-for="(item, index) in menus" :class="index !== item.length-1 ? 'padding-rt-66' : 'padding-rt-0'"
+                @mouseenter="item.active = true" @mouseout="item.active = false"
+            >
+                <a :href="item.lnk" :style="{color: item.active ? '#fea911' : '#fff'}">
+                    <h6>\</h6>
+                    <img :src="item.active ? item.iconActive : item.icon"
+                         :alt="item.title"
+                    >
+                    <span>{{item.title}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--nav end-->
+
+<!--content start-->
+<div class="channel-content-wrapper">
+    <div class="content-wrapper">
+        <ul class="menu-list">
+            <li class="active">国家政策法规</li>
+            <li>政府政策法规</li>
+            <li>军方政策法规</li>
+            <li>创新政策法规</li>
+            <li>地方政策法规</li>
+        </ul>
+        <div class="policy-list">
+            <div class="policy-item">
+                <a href="#">
+                    <span class="title">深入实施国家知识产权战略行动计划(2014-2020年)</span>
+                    <span class="date">2018-12-05</span>
+                </a>
+            </div><div class="policy-item">
+                <a href="#">
+                    <span class="title">深入实施国家知识产权战略行动计划(2014-2020年)</span>
+                    <span class="date">2018-12-05</span>
+                </a>
+            </div><div class="policy-item">
+                <a href="#">
+                    <span class="title">深入实施国家知识产权战略行动计划(2014-2020年)</span>
+                    <span class="date">2018-12-05</span>
+                </a>
+            </div><div class="policy-item">
+                <a href="#">
+                    <span class="title">深入实施国家知识产权战略行动计划(2014-2020年)</span>
+                    <span class="date">2018-12-05</span>
+                </a>
+            </div><div class="policy-item">
+                <a href="#">
+                    <span class="title">深入实施国家知识产权战略行动计划(2014-2020年)</span>
+                    <span class="date">2018-12-05</span>
+                </a>
+            </div><div class="policy-item">
+                <a href="#">
+                    <span class="title">深入实施国家知识产权战略行动计划(2014-2020年)</span>
+                    <span class="date">2018-12-05</span>
+                </a>
+            </div><div class="policy-item">
+                <a href="#">
+                    <span class="title">深入实施国家知识产权战略行动计划(2014-2020年)</span>
+                    <span class="date">2018-12-05</span>
+                </a>
+            </div><div class="policy-item">
+                <a href="#">
+                    <span class="title">深入实施国家知识产权战略行动计划(2014-2020年)</span>
+                    <span class="date">2018-12-05</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--content end-->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="js/CustomerService.js"></script>
+    <script src="js/Lytine_nav.js"></script>
+</body>
+</html>

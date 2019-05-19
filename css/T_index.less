@@ -1,0 +1,303 @@
+[v-cloak] {
+  display: none
+}
+
+body {
+  background: #ededed;
+}
+
+/*公共样式*/
+.margin-lf-10 {
+  margin-left: 10px;
+}
+
+.margin-rt-10 {
+  margin-right: 10px;
+}
+
+.margin-lf-20 {
+  margin-left: 20px;
+}
+
+.margin-bt-20 {
+  margin-bottom: 20px;
+}
+
+.padding-rt-0 {
+  padding-right: 0;
+}
+
+.margin-top-30 {
+  margin-top: 30px;
+}
+
+button {
+  outline: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* 公共容器1200px */
+.content-wrapper {
+  width: 1200px;
+  margin: 0 auto;
+  font-size: 0;
+
+}
+
+/* 首页头部导航 start*/
+.nav-wrapper {
+  background: url("../img/banner.png") no-repeat;
+  top: 0;
+  width: 100%;
+  background-position: center 0;
+  background-attachment: fixed;
+  zoom: 1;
+
+}
+
+.nav-top-wrapper {
+  padding-bottom: 115px;
+  position: relative;
+
+  .logo {
+    padding-top: 45px;
+  }
+
+  .platform-title {
+    font-family: SourceHanSansCN-Bold;
+    font-size: 50px;
+    color: #FFF;
+    text-align: center;
+    padding-top: 80px;
+    font-weight: bold;
+  }
+
+  .plateform-Info {
+    opacity: 0.8;
+    font-family: SourceHanSansCN-Bold;
+    font-size: 14px;
+    color: #FFF;
+    text-align: center;
+    margin: 15px auto;
+  }
+
+  .search {
+    font-size: 0;
+
+    input {
+      display: inline-block;
+      width: 548px;
+      height: 45px;
+      background: #FFF;
+      border-radius: 5px 0 0 5px;
+      font-size: 18px;
+      padding: 0 15px;
+      margin-left: 265px;
+      border: 2px solid transparent;
+    }
+
+    input:hover {
+      border: 2px solid #2976ce;
+      outline: 0;
+      -webkit-transition: border linear .2s, -webkit-box-shadow linear .5s;
+      border-color: rgba(39, 118, 208, .75);
+      -webkit-box-shadow: 0 0 18px rgba(50, 102, 185, 3);
+    }
+
+    .search-icon {
+      display: inline-block;
+      background: url("../img/search.png") no-repeat;
+      height: 50px;
+      width: 86px;
+      vertical-align: bottom;
+      opacity: 1;
+    }
+
+    .search-icon:hover {
+      cursor: pointer;
+      opacity: 0.9;
+
+    }
+  }
+}
+
+.login-reg-wrapper {
+  background: url("../img/login.png") no-repeat;
+  height: 40px;
+  width: 205px;
+  position: absolute;
+  right: 0;
+  color: #fff;
+  line-height: 40px;
+  text-align: center;
+  font-size: 12px;
+
+  .login {
+    margin-left: 25px;
+  }
+
+  .login:hover {
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .line {
+    margin: 0 15px;
+    color: #fff;
+    vertical-align: top;
+  }
+
+  .reg:hover {
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+.nav-bottom-wrapper {
+  background: #fff;
+  height: 250px;
+  width: 100%;
+  text-align: center;
+
+  .item {
+    height: 150px;
+    width: 120px;
+    display: inline-block;
+    padding: 50px 90px 0 90px;
+  }
+
+  img {
+    height: 120px;
+    width: 120px;
+    opacity: 1;
+  }
+
+  img:hover {
+    opacity: 0.9;
+    cursor: pointer;
+    transform: scale(0.98);
+  }
+
+  .desc {
+    font-size: 14px;
+    color: #333333;
+  }
+
+  .desc:hover {
+    font-weight: bold;
+  }
+
+}
+
+
+.notice-list-wrapper {
+  position: relative;
+}
+
+.home-search-wrapper {
+  background: #fff;
+  padding: 15px 0;
+
+  .icon {
+    padding-left: 20px;
+    border-bottom: 1px solid #ededed;
+    height: 40px;
+    position: relative;
+
+    img {
+      vertical-align: middle;
+    }
+
+    .notice-new {
+      font-size: 22px;
+      color: #333333;
+      font-weight: bold;
+      vertical-align: middle;
+    }
+
+    .right-tips {
+      font-family: MicrosoftYaHei;
+      font-size: 14px;
+      color: #333333;
+      line-height: 30px;
+      position: absolute;
+      right: 15px;
+
+      h6 {
+        display: inline-block;
+        color: #FF9900;
+        font-weight: bold
+      }
+
+      h6:hover {
+        color: #F09000;
+        font-size: 16px;
+      }
+    }
+
+  }
+
+  .search {
+    padding-left: 30px;
+    padding-top: 15px;
+    color: #333;
+
+
+    .notice-type {
+      display: inline-block;
+
+      .select-type {
+        width: 260px;
+        height: 28px;
+        color: #333;
+        border: 1px solid #DDDDDD;
+        border-radius: 2px;
+        font-size: 14px;
+      }
+
+    }
+
+    .publish-date {
+      display: inline-block;
+      padding-left: 35px;
+    }
+
+    .notice-project-name {
+      display: inline-block;
+      padding-top: 15px;
+
+      input {
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        width: 934px;
+        height: 28px;
+      }
+    }
+
+
+  }
+}
+
+/*elementui的日期重写*/
+.el-input__icon {
+  line-height: 30px !important;
+}
+
+.el-date-editor.el-input, .el-date-editor.el-input__inner {
+  width: 275px !important;
+  margin-left: 10px;
+}
+
+.el-input__inner {
+  border-radius: 2px;
+  height: 28px !important;
+}
+
+
+/*下拉框样式*/
+
+

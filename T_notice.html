@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>采联军民融合-通知公告</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="plugins/element-ui/index.css">
+    <link rel="stylesheet" href="css/CustomerService.css">
+    <link rel="stylesheet" href="css/notice_list.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/T_notice.css">
+    <link rel="stylesheet" href="component/LytineProgress/lytine-progress.css">
+</head>
+<body>
+<!--nav start-->
+<div class="nav-bar-wrapper" id="nav-app">
+    <div class="nav-bg">
+        <div class="content-wrapper">
+            <img src="img/logo.png"style="padding-top:40px;" /></div>
+    </div>
+    <div class="nav-menu" id="navMenu">
+        <ul class="content-wrapper">
+            <li style="margin-left:30px;">
+                <a href="#">
+                    <img src="img/home.png" alt="首页">
+                    <span class="nav-home">首页</span>
+                </a>
+            </li>
+            <li v-for="(item, index) in menus" :class="index !== item.length-1 ? 'padding-rt-66' : 'padding-rt-0'"
+                @mouseenter="item.active = true" @mouseout="item.active = false"
+            >
+                <a :href="item.lnk" :style="{color: item.active ? '#fea911' : '#fff'}">
+                    <h6>\</h6>
+                    <img :src="item.active ? item.iconActive : item.icon"
+                         :alt="item.title"
+                    >
+                    <span>{{item.title}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--nav end-->
+
+<!--suspension 在线客服 start-->
+<div class="suspension">
+    <div class="suspension-box">
+
+        <a href="javascript:;" class="a a-service "></a>
+        <a href="javascript:;" class="a a-service-phone"></a>
+        <a href="javascript:;" class="a a-qrcode"></a>
+        <a href="javascript:;" class="a a-top"></a>
+
+        <div class="d d-service">
+            <i class="arrow"></i>
+            <div class="inner-box">
+                <div class="d-service-item clearfix">
+                    <a href="tencent://message/?uin=3105725452&Site=&Menu=yes" class="clearfix">
+                        <span class="circle"><i class="i-qq"></i></span>
+                        <h3>咨询在线客服</h3></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="d d-service-phone">
+            <i class="arrow"></i>
+            <div class="inner-box">
+                <div class="d-service-item clearfix">
+                    <span class="circle"><i class="i-tel"></i></span>
+                    <h3>服务热线暂未开通</h3></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="d d-qrcode">
+            <i class="arrow"></i>
+            <div class="inner-box">
+                <img src="img/qrCode.jpg" style="width:200px;">
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--suspension 在线客服 end-->
+
+<!--content start-->
+<div class="content-wrapper" id="cmi-app">
+    <!--公告搜索面板-->
+    <div class="search-panel">
+        <ul class="tab">
+            <li><a @click="changeType(0)" :class="queryParams.type == 0?'active': ''">竞价公告</a></li>
+            <li><a @click="changeType(5)" :class="queryParams.type == 5?'active': ''">结果公告</a></li>
+            <li><a @click="changeType(1)" :class="queryParams.type == 1?'active': ''">更正公告</a></li>
+            <li><a @click="changeType(7)" :class="queryParams.type == 7?'active': ''">调研公告</a></li>
+            <li><a @click="changeType(6)" :class="queryParams.type == 6?'active': ''">废标公告</a></li>
+        </ul>
+        <div class="search">
+            <div class="project-name">
+                <h6>项目名称: </h6>
+                <input type="text" v-model="queryParams.Project_Name">
+            </div>
+            <div class="publish-date">
+                <h6>发布日期: </h6>
+                <template>
+                    <el-date-picker
+                            v-model="queryParams.periodStart"
+                            type="date"
+                            placeholder="选择开始日期"
+                            format="yyyy 年 MM 月 dd 日">
+                    </el-date-picker>
+                </template>
+                <span class="margin-lf-10">至</span>
+                <template>
+                    <el-date-picker
+                            v-model="queryParams.periodEnd"
+                            type="date"
+                            placeholder="选择结束日期"
+                            format="yyyy 年 MM 月 dd 日">
+                    </el-date-picker>
+                </template>
+            </div>
+            <button class="search-btn" @click="search">搜索</button>
+        </div>
+    </div>
+    <!--搜索中 遮罩层-->
+    <div class="load-wrapper">
+        <div v-if="loading" class="loading-mask">
+            <img src="img/loading.gif"/>
+        </div>
+        <div v-if="loadStatus" class="loading-data">
+            <div v-if="loadStatus === 1">
+                <img src="img/nodata.png" height="134" width="134"/>
+                <br/>
+                <span>暂无数据</span>
+            </div>
+            <div v-if="loadStatus === 2">
+                <img src="img/loadfail.png" height="134" width="134"/>
+                <br/>
+                <span>数据加载失败</span>
+            </div>
+            <div v-if="loadStatus === 3">
+                <img src="img/neterror.png" height="134" width="134"/>
+                <br/>
+                <span>网络异常，请刷新重试</span>
+            </div>
+        </div>
+    </div>
+    <!--公告内容面板-->
+    <div class="notice-list" id="bids">
+        <div v-for="(item,index) in bidsPage.rows" class="notice-item" :class="index % 4 == 0 ? '' : 'margin-lf-20'"
+             @click="open(item.PublicId,item.Id)">
+            <div class="notice-Info">
+                <h1 class="project-name">
+                    {{item.Title}}
+                </h1>
+                <h2 class="company-name">
+                    <span>采购单位:</span>
+                    <span>{{item.platformName}}</span>
+                </h2>
+                <h3 class="add-time">
+                    <span>发布时间:</span>
+                    <span>{{item.NoticeDate | formatTime}}</span>
+                </h3>
+            </div>
+            <!--竞价公告-->
+            <div v-if="item.NoticeType === '0' ">
+                <div class="notice-countdown" v-if="getStatus(item) == '0' ">
+                    <span class="time-tips">距离报名开始时间:</span>
+                    <p class="display-time">
+                        <lytine-progress :height="10" :time-start="getPeriod(item).start" :time-end="getPeriod(item).end"></lytine-progress>
+                    </p>
+                    <span class="time-start">即将开始</span>
+                </div>
+                <div class="notice-countdown" v-if="getStatus(item) == '1' ">
+                    <span class="time-tips">距离报名结束时间:</span>
+                    <p class="display-time">
+                        <lytine-progress :height="10" :time-start="getPeriod(item).start" :time-end="getPeriod(item).end"></lytine-progress>
+                    </p>
+                    <span class="time-doing">进行中</span>
+                </div>
+                <div class="notice-countdown" v-if="getStatus(item) == '2' ">
+                    <span class="time-tips">距离竞价开始时间:</span>
+                    <p class="display-time">
+                        <lytine-progress :height="10" :time-start="getPeriod(item).start" :time-end="getPeriod(item).end"></lytine-progress>
+                    </p>
+                    <span class="time-start">即将开始</span>
+                </div>
+                <div class="notice-countdown" v-if="getStatus(item) == '3' ">
+                    <span class="time-tips">距离竞价开始时间:</span>
+                    <div class="display-time">
+                        <lytine-progress :height="10" :time-start="getPeriod(item).start" :time-end="getPeriod(item).end"></lytine-progress>
+                    </div>
+                    <span class="time-doing">进行中</span>
+                </div>
+                <div class="notice-countdown" v-if="getStatus(item) == '4' ">
+                    <span class="time-tips">竞价时间段:</span>
+                    <p class="display-time">
+                        {{item.UppriceFromTime | formatTime}} 至
+                        </br>
+                        {{item.UppriceToTime | formatTime}}
+                    </p>
+                    <span class="time-end">已结束</span>
+                </div>
+            </div>
+            <!--调研公告-->
+            <div v-if="item.NoticeType === '7'">
+                <div class="notice-countdown" v-if="getStatus(item) == '0' ">
+                    <span class="time-tips">距离报名开始时间:</span>
+                    <p class="display-time">
+                        <lytine-progress :height="10" :time-start="getPeriod(item).start" :time-end="getPeriod(item).end"></lytine-progress>
+                    </p>
+                    <span class="time-start">即将开始</span>
+                </div>
+                <div class="notice-countdown" v-if="getStatus(item) == '1' ">
+                    <span class="time-tips">距离报名结束时间:</span>
+                    <p class="display-time">
+                        {{item.ApplyToTime | formatTime}}
+                    </p>
+                    <span class="time-doing">正在报名</span>
+                </div>
+                <div class="notice-countdown" v-if="getStatus(item) == '4' ">
+                    <span class="time-tips">调研时间段:</span>
+                    <p class="display-time">
+                        {{item.UppriceFromTime | formatTime}} 至
+                        </br>
+                        {{item.UppriceToTime | formatTime}}
+                    </p>
+                    <span class="time-end">已结束</span>
+                </div>
+            </div>
+            <!--结果公告-->
+            <div v-if="item.NoticeType === '5'">
+                <div class="notice-countdown">
+                    <span class="time-tips">结果公告</span>
+                    <p class="pretend-file">
+                        结果公告
+                    </p>
+                </div>
+            </div>
+            <!--废标公告-->
+            <div v-if="((item.NoticeType === '6') ||(item.NoticeType === '11'))">
+                <div class="notice-countdown">
+                    <span class="time-tips">废标原因:</span>
+                    <p class="pretend-file">
+                        {{item.Content | removeString}}
+                    </p>
+                </div>
+            </div>
+            <!--更正公告-->
+            <div v-if="item.NoticeType === '1'">
+                <div class="notice-countdown">
+                    <span class="time-tips">更正公告:</span>
+                    <p class="pretend-file">
+                        更正公告
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--分页条 start-->
+    <div class="bids-page">
+        <el-pagination background
+                       :total="bidsPage.total"
+                       :page-size="12"
+                       :current-page="queryParams.page"
+                       @current-change="goPage($event)"
+                       layout="prev, pager, next, jumper">
+        </el-pagination>
+        <button class="jump" @current-change="goPage($event)">跳转</button>
+    </div>
+    <!--分页条 end-->
+</div>
+<!--content end-->
+<!--footer start-->
+<div class="footer-wrapper">
+    <span>Copyright &copy; 2013-2018 广东采联采购科技有限公司. All rights reserved. 粤IPC备15024293号 <a href="javascript:;">点击打开信息产业部备案管理系统</a></span>
+    </br>
+    <span>Copyright &copy; 2013-2018 Guangdong Choicelink Internet Technology Co.,Ltd;</span>
+    </br>
+    <span>地址：广州市越秀区环市东路472号粤海大厦7、23楼 邮政编码: 510075 电话: (020) 8765 1688 (8条线) 传真：(020) 8765 9323  (020)8765 1698</span>
+    </br>
+    <span>所有内容未经授权,不得转载或做其他使用.违者必究</span>
+</div>
+<!--footer end-->
+<script src="js/jquery.min.js"></script>
+<script src="plugins/moment.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/axios.js"></script>
+<script src="component/LytineProgress/lytine-progress.js"></script>
+<script src="./plugins/element-ui/index.js"></script>
+<script src="js/Lytine_notice_config.js"></script>
+<script src="js/Lytine_notice.js"></script>
+<script src="js/Lytine_nav.js"></script>
+<script src="js/CustomerService.js"></script>
+</body>
+</html>

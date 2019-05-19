@@ -1,0 +1,125 @@
+.file-uploader-wrapper {
+    display: inline-block;
+    margin: 0;
+    /*padding: 10px;*/
+    width: 100%;
+}
+
+.file-uploader-list {
+    font-size: 0;
+    vertical-align: top;
+    width: 266px; /*修改长度*/
+}
+
+.file-file-item {
+    background: 0 2px url(addition.png) no-repeat;
+    position: relative;
+    font-size: 13px;
+    margin-bottom: 16px;
+    padding-left: 28px;
+}
+
+
+.file-upload-btn {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: #4a90e2;
+    color: #fff;
+    font-size: 15px;
+    border-radius: 3px;
+    padding: 5px 8px;
+}
+
+.file-upload-tips {
+    color: #999;
+    font-size: 12px;
+   /*margin-left: 10px;*/
+}
+
+.file-thumb-mask {
+    border-radius: 3px;
+    position: absolute;
+    top: 10px;
+    display: none;
+    width: 100px;
+    z-index: 2;
+    background-color: #00000099;
+    line-height: 100px;
+    text-align: center;
+    color: #fff;
+}
+
+.file-rm-btn-wrapper {
+    font-size: 1rem;
+    position: absolute;
+    right: 0;
+    top: 3px;
+    cursor: pointer;
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+    line-height: 1.2em;
+    z-index: 999;
+    height: 15px;
+    width: 15px;
+    background-image: url(del.png);
+}
+
+.file-retry-btn-wrapper {
+    display: none;
+    font-size: 1rem;
+    position: absolute;
+    right: 13px;
+    top: 3px;
+    cursor: pointer;
+    color: #fff;
+    text-align: center;
+    line-height: 1.2em;
+    z-index: 999;
+    height: 15px;
+    width: 15px;
+    background-image: url(retry.png);
+}
+
+.file-progress-wrapper {
+    height: 3px;
+    margin-top: 4px;
+    background-color: #f2f2f2;
+}
+.file-progress {
+    height: 3px;
+    width: 0;
+}
+
+.file-progress-uploading {
+    background-color: #4a90e2;
+}
+
+.file-progress-success {
+    background-color: #0000;
+}
+
+.file-file-picker > div {
+    margin: 10px 0;
+    background-image: url("uploader.png");
+    background-repeat: no-repeat;
+    height: 100px;
+    width: 100px;
+}
+
+.file-file-picker .webuploader-pick,
+.file-uploader-list {
+    position: relative;
+    font-size: 1rem;
+    background: none;
+    padding: 10px 0;
+    display: inline-block;
+    vertical-align: top;
+    width:332px;
+}
+
+/*进度条*/
+.file-pro {
+
+}
