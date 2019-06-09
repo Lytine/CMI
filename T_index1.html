@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>采联军民融合-首页</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="plugins/element-ui/index.css">
+    <link rel="stylesheet" href="css/CustomerService.css">
+    <link rel="stylesheet" href="css/notice_list.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/T_index.css">
+    <link rel="stylesheet" href="component/LytineProgress/lytine-progress.css">
+</head>
+<body>
+<!-- home nav start-->
+<div class="nav-wrapper">
+    <div class="content-wrapper ">
+        <div class="nav-top-wrapper">
+            <div class="login-reg-wrapper">
+                <span class="login">登陆</span>
+                <span class="line">|</span>
+                <span class="reg">注册</span>
+            </div>
+            <div class="logo">
+                <img src="img/logo.png" height="54" width="588"/>
+            </div>
+            <div class="platform-title">
+                线上采购一体化平台
+            </div>
+            <div class="plateform-Info">构建采购信息和供应商资源管理的共享平台</div>
+            <div class="search">
+                <input type="text">
+                <span class="search-icon"></span>
+            </div>
+        </div>
+    </div>
+    <!--nav start-->
+    <div class="nav-bar-wrapper" id="nav-app">
+        <div class="nav-menu" id="navMenu">
+            <ul class="content-wrapper">
+                <li style="margin-left:30px;">
+                    <a href="#">
+                        <img src="img/home.png" alt="首页">
+                        <span class="nav-home">首页</span>
+                    </a>
+                </li>
+                <li v-for="(item, index) in menus"
+                    :class="index !== item.length-1 ? 'padding-rt-66' : 'padding-rt-0'"
+                    @mouseenter="item.active = true" @mouseout="item.active = false"
+                >
+                    <a :href="item.lnk" :style="{color: item.active ? '#fea911' : '#fff'}">
+                        <h6>\</h6>
+                        <img :src="item.active ? item.iconActive : item.icon"
+                             :alt="item.title"
+                        >
+                        <span>{{item.title}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--nav end-->
+
+    <div class="nav-bottom-wrapper">
+        <div class="content-wrapper">
+            <div class="item"><img src="img/1.png"/><span class="desc">发布公告</span></div>
+            <div class="item"><img src="img/2.png"/><span class="desc">网上询价</span></div>
+            <div class="item"><img src="img/3.png"/><span class="desc">抽取专家</span></div>
+            <div class="item"><img src="img/4.png"/><span class="desc">采购咨询</span></div>
+        </div>
+    </div>
+
+</div>
+<!-- home nav end-->
+
+<!--content start-->
+<div class="content-wrapper" id="cmi-app">
+    <!-- 搜索面板-->
+    <div class="home-search-wrapper margin-top-30">
+        <div class="icon">
+            <span><img src="img/notice-new.png" height="25" width="25"/></span>
+            <span class="notice-new">最新公告</span>
+            <span class="right-tips">近半年招标项目<h6>1249326</h6>个</span>
+        </div>
+        <div class="search">
+            <div class="notice-type">类型:
+                <select name="drop" class="select-type">
+                    <option value="">不限</option>
+                    <option value="1" selected>竞价公告</option>
+                    <option value="2">结果公告</option>
+                    <option value="3">更正公告</option>
+                    <option value="4">调研公告</option>
+                    <option value="5">废标公告</option>
+                </select>
+            </div>
+            <div class="publish-date">
+                <span>发布日期: </span>
+                <template>
+                    <el-date-picker
+                            v-model="queryParams.periodStart"
+                            type="date"
+                            placeholder="选择开始日期"
+                            format="yyyy 年 MM 月 dd 日">
+                    </el-date-picker>
+                </template>
+                <span class="margin-lf-10">至</span>
+                <template>
+                    <el-date-picker
+                            v-model="queryParams.periodEnd"
+                            type="date"
+                            placeholder="选择结束日期"
+                            format="yyyy 年 MM 月 dd 日">
+                    </el-date-picker>
+                </template>
+            </div>
+            <div class="notice-project-name">
+                <span>项目名称:</span>
+                <input type="text" >
+            </div>
+        </div>
+    </div>
+
+    <div class="notice-list-wrapper">
+        <!--搜索中 遮罩层-->
+        <div class="load-wrapper">
+            <div v-if="loading" class="loading-mask">
+                <img src="img/loading.gif"/>
+            </div>
+            <div v-if="loadStatus" class="loading-data">
+                <div v-if="loadStatus === 1">
+                    <img src="img/nodata.png" height="134" width="134"/>
+                    <br/>
+                    <span>暂无数据</span>
+                </div>
+                <div v-if="loadStatus === 2">
+                    <img src="img/loadfail.png" height="134" width="134"/>
+                    <br/>
+                    <span>数据加载失败</span>
+                </div>
+                <div v-if="loadStatus === 3">
+                    <img src="img/neterror.png" height="134" width="134"/>
+                    <br/>
+                    <span>网络异常，请刷新重试</span>
+                </div>
+            </div>
+        </div>
+     <!--   &lt;!&ndash;公告内容面板&ndash;&gt;
+        <div class="notice-list" id="bids">
+            <div v-for="(item,index) in bidsPage.rows" class="notice-item" :class="index % 4 == 0 ? '' : 'margin-lf-20'"
+                 @click="open(item.PublicId,item.Id)">
+                <div class="notice-Info">
+                    <h1 class="project-name">
+                        {{item.Title}}
+                    </h1>
+                    <h2 class="company-name">
+                        <span>采购单位:</span>
+                        <span>{{item.platformName}}</span>
+                    </h2>
+                    <h3 class="add-time">
+                        <span>发布时间:</span>
+                        <span>{{item.NoticeDate | formatTime}}</span>
+                    </h3>
+                </div>
+                &lt;!&ndash;竞价公告&ndash;&gt;
+                <div v-if="item.NoticeType === '0' ">
+                    <div class="notice-countdown" v-if="getStatus(item) == '0' ">
+                        <span class="time-tips">距离报名开始时间:</span>
+                        <p class="display-time">
+                            <lytine-progress :height="10" :time-start="getPeriod(item).start" :time-end="getPeriod(item).end"></lytine-progress>
+                        </p>
+                        <span class="time-start">即将开始</span>
+                    </div>
+                    <div class="notice-countdown" v-if="getStatus(item) == '1' ">
+                        <span class="time-tips">距离报名结束时间:</span>
+                        <p class="display-time">
+                            <lytine-progress :height="10" :time-start="getPeriod(item).start" :time-end="getPeriod(item).end"></lytine-progress>
+                        </p>
+                        <span class="time-doing">进行中</span>
+                    </div>
+                    <div class="notice-countdown" v-if="getStatus(item) == '2' ">
+                        <span class="time-tips">距离竞价开始时间:</span>
+                        <p class="display-time">
+                            <lytine-progress :height="10" :time-start="getPeriod(item).start" :time-end="getPeriod(item).end"></lytine-progress>
+                        </p>
+                        <span class="time-start">即将开始</span>
+                    </div>
+                    <div class="notice-countdown" v-if="getStatus(item) == '3' ">
+                        <span class="time-tips">距离竞价开始时间:</span>
+                        <div class="display-time">
+                            <lytine-progress :height="10" :time-start="getPeriod(item).start" :time-end="getPeriod(item).end"></lytine-progress>
+                        </div>
+                        <span class="time-doing">进行中</span>
+                    </div>
+                    <div class="notice-countdown" v-if="getStatus(item) == '4' ">
+                        <span class="time-tips">竞价时间段:</span>
+                        <p class="display-time">
+                            {{item.UppriceFromTime | formatTime}} 至
+                            </br>
+                            {{item.UppriceToTime | formatTime}}
+                        </p>
+                        <span class="time-end">已结束</span>
+                    </div>
+                </div>
+                &lt;!&ndash;调研公告&ndash;&gt;
+                <div v-if="item.NoticeType === '7'">
+                    <div class="notice-countdown" v-if="getStatus(item) == '0' ">
+                        <span class="time-tips">距离报名开始时间:</span>
+                        <p class="display-time">
+                            <lytine-progress :height="10" :time-start="getPeriod(item).start" :time-end="getPeriod(item).end"></lytine-progress>
+                        </p>
+                        <span class="time-start">即将开始</span>
+                    </div>
+                    <div class="notice-countdown" v-if="getStatus(item) == '1' ">
+                        <span class="time-tips">距离报名结束时间:</span>
+                        <p class="display-time">
+                            {{item.ApplyToTime | formatTime}}
+                        </p>
+                        <span class="time-doing">正在报名</span>
+                    </div>
+                    <div class="notice-countdown" v-if="getStatus(item) == '4' ">
+                        <span class="time-tips">调研时间段:</span>
+                        <p class="display-time">
+                            {{item.UppriceFromTime | formatTime}} 至
+                            </br>
+                            {{item.UppriceToTime | formatTime}}
+                        </p>
+                        <span class="time-end">已结束</span>
+                    </div>
+                </div>
+                &lt;!&ndash;结果公告&ndash;&gt;
+                <div v-if="item.NoticeType === '5'">
+                    <div class="notice-countdown">
+                        <span class="time-tips">结果公告</span>
+                        <p class="pretend-file">
+                            结果公告
+                        </p>
+                    </div>
+                </div>
+                &lt;!&ndash;废标公告&ndash;&gt;
+                <div v-if="((item.NoticeType === '6') ||(item.NoticeType === '11'))">
+                    <div class="notice-countdown">
+                        <span class="time-tips">废标原因:</span>
+                        <p class="pretend-file">
+                            {{item.Content | removeString}}
+                        </p>
+                    </div>
+                </div>
+                &lt;!&ndash;更正公告&ndash;&gt;
+                <div v-if="item.NoticeType === '1'">
+                    <div class="notice-countdown">
+                        <span class="time-tips">更正公告:</span>
+                        <p class="pretend-file">
+                            更正公告
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+        <!--公告内容面板-->
+        <div class="notice-list" id="bids">
+            <div v-for="(item,index) in bidsPage.rows" class="notice-item"
+                 :class="index % 4 == 0 ? '' : 'margin-lf-20'" @click="goNoticePage(item.PublicId, item.Id)">
+                <div class="notice-Info">
+                    <h1 class="project-name">
+                        {{item.Title}}
+                    </h1>
+                    <h2 class="company-name">
+                        <span>采购单位:</span>
+                        <span>{{item.platformName}}</span>
+                    </h2>
+                    <h3 class="add-time">
+                        <span>发布时间:</span>
+                        <span>{{item.NoticeDate | formatTime}}</span>
+                    </h3>
+                </div>
+                <!--竞价公告-->
+                <div v-if="item.NoticeType === '0' ">
+                    <div class="notice-countdown" v-if="getStatus(item) == '0' ">
+                        <span class="time-tips">距离报名开始时间:</span>
+                        <p class="display-time">
+                            <lytine-progress :height="10" :time-start="getPeriod(item).start"
+                                             :time-end="getPeriod(item).end"></lytine-progress>
+                        </p>
+                        <span class="time-start">即将开始</span>
+                    </div>
+                    <div class="notice-countdown" v-if="getStatus(item) == '1' ">
+                        <span class="time-tips">距离报名结束时间:</span>
+                        <p class="display-time">
+                            <lytine-progress :height="10" :time-start="getPeriod(item).start"
+                                             :time-end="getPeriod(item).end"></lytine-progress>
+                        </p>
+                        <span class="time-doing">进行中</span>
+                    </div>
+                    <div class="notice-countdown" v-if="getStatus(item) == '2' ">
+                        <span class="time-tips">距离竞价开始时间:</span>
+                        <p class="display-time">
+                            <lytine-progress :height="10" :time-start="getPeriod(item).start"
+                                             :time-end="getPeriod(item).end"></lytine-progress>
+                        </p>
+                        <span class="time-start">即将开始</span>
+                    </div>
+                    <div class="notice-countdown" v-if="getStatus(item) == '3' ">
+                        <span class="time-tips">距离竞价开始时间:</span>
+                        <div class="display-time">
+                            <lytine-progress :height="10" :time-start="getPeriod(item).start"
+                                             :time-end="getPeriod(item).end"></lytine-progress>
+                        </div>
+                        <span class="time-doing">进行中</span>
+                    </div>
+                    <div class="notice-countdown" v-if="getStatus(item) == '4' ">
+                        <span class="time-tips">竞价时间段:</span>
+                        <p class="display-time timeEnd">
+                            {{item.UppriceFromTime | formatTime}} 至
+                            </br>
+                            {{item.UppriceToTime | formatTime}}
+                        </p>
+                        <span class="time-end">已结束</span>
+                    </div>
+                </div>
+                <!--调研公告-->
+                <div v-if="item.NoticeType === '7'">
+                    <div class="notice-countdown" v-if="getStatus(item) == '0' ">
+                        <span class="time-tips">距离报名开始时间:</span>
+                        <p class="display-time">
+                            <lytine-progress :height="10" :time-start="getPeriod(item).start"
+                                             :time-end="getPeriod(item).end"></lytine-progress>
+                        </p>
+                        <span class="time-start">即将开始</span>
+                    </div>
+                    <div class="notice-countdown" v-if="getStatus(item) == '1' ">
+                        <span class="time-tips">距离报名结束时间:</span>
+                        <p class="display-time">
+                            {{item.ApplyToTime | formatTime}}
+                        </p>
+                        <span class="time-doing">正在报名</span>
+                    </div>
+                    <div class="notice-countdown" v-if="getStatus(item) == '4' ">
+                        <span class="time-tips">调研时间段:</span>
+                        <p class="display-time timeEnd">
+                            {{item.UppriceFromTime | formatTime}} 至
+                            </br>
+                            {{item.UppriceToTime | formatTime}}
+                        </p>
+                        <span class="time-end">已结束</span>
+                    </div>
+                </div>
+                <!--结果公告-->
+                <div v-if="item.NoticeType === '5'">
+                    <div class="notice-countdown">
+                        <span class="time-tips">结果公告</span>
+                        <p class="pretend-file">
+                            结果公告
+                        </p>
+                    </div>
+                </div>
+                <!--废标公告-->
+                <div v-if="((item.NoticeType === '6') ||(item.NoticeType === '11'))">
+                    <div class="notice-countdown">
+                        <span class="time-tips">废标原因:</span>
+                        <p class="pretend-file">
+                            {{item.Content | removeString}}
+                        </p>
+                    </div>
+                </div>
+                <!--更正公告-->
+                <div v-if="item.NoticeType === '1'">
+                    <div class="notice-countdown">
+                        <span class="time-tips">更正公告:</span>
+                        <p class="pretend-file">
+                            更正公告
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!--content end-->
+
+<script src="js/jquery.min.js"></script>
+<script src="plugins/moment.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/axios.js"></script>
+<script src="component/LytineProgress/lytine-progress.js"></script>
+<script src="plugins/element-ui/index.js"></script>
+<script src="js/CustomerService.js"></script>
+<script src="js/Lytine_nav.js"></script>
+<script src="js/Lytine_notice.js"></script>
+</body>
+</html>

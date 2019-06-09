@@ -1,7 +1,13 @@
+/**
+ * Created by laicuiting.
+ */
 LPTemplate = `
-<div>
-  <div class="tag":style="{'left': percent * 100 + '%'}">{{txt}}</div>
-  <div class="lytine-progress" :style="{'background-color': percent<0.5 ? bgColor : color, 'height': height + 'px'}">
+<div class="lytine-progress-wrapper">
+  <div ref="bubble" class="bubble" style="display: none">
+    <div ref="txt" class="bubble-txt" :style="bubbleStyle">{{txt}}</div>
+    <div class="bubble-arrow" :style="{'left': percent * 100 + '%'}"></div>
+  </div>
+  <div ref="p" class="lytine-progress" :style="{'background-color': percent<0.5 ? bgColor : color, 'height': height + 'px'}">
       <div class="fill-left" :style="{'width': percent<0.5 ? percent*100+'%' : '50%', 'background-color': color}"></div>
       <div class="fill-right" :style="{'width': percent<0.5 ? 0 : (1-percent)*100+'%', 'background-color': bgColor}"></div>
   </div>
@@ -51,6 +57,30 @@ Vue.component('lytine-progress', {
       now: ''
     }
   },
+  computed: {
+    bubbleStyle() {
+      let style = {};
+      let percent = this.percent;
+      let dom = this.$refs.txt;
+      let offset = 16; // 偏移量
+      if (dom) {
+        this.$refs.bubble.style.display = 'block';
+        let w = dom.offsetWidth;
+        let pw = this.$refs.p.offsetWidth;
+        if (percent * pw < w / 2 - offset) { // 在左边
+          style.left = -offset + 'px';
+          style.right = 'auto';
+        } else if (pw - percent * pw < w / 2 - offset) {
+          style.left = 'auto';
+          style.right = -offset + 'px';
+        } else {
+          style.left = pw * percent - w / 2 + 'px';
+          style.right = 'auto';
+        }
+      }
+      return style
+    }
+  },
   methods: {
     getTimeText() {
       const SMS = 1000;
@@ -80,6 +110,8 @@ Vue.component('lytine-progress', {
   mounted() {
     this.percent = +this.progress;
     this.now = this.timeNow;
+    this.txt = this.getTimeText();
+    this.percent = this.getPercent();
     const it = setInterval(()=>{
       this.txt = this.getTimeText();
       this.percent = this.getPercent();

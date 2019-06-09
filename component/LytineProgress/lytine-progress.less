@@ -1,54 +1,71 @@
-.lytine-progress {
-  border: none;
-  border-radius: 25px;
+.lytine-progress-wrapper {
   position: relative;
 
-  .fill-left {
-    height: 100%;
-    border: inherit;
-    border-radius: 25px 0 0 25px;
+  .lytine-progress {
+    border: none;
+    border-radius: 25px;
+    position: relative;
+    margin-top: 6px;
+
+    .fill-left {
+      height: 100%;
+      border: inherit;
+      border-radius: 25px 0 0 25px;
+    }
+
+    .fill-right {
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: inherit;
+      float: right;
+      border-radius: 0 25px 25px 0;
+    }
   }
 
-  .fill-right {
-    height: 100%;
+}
+
+
+
+.bubble{
+  position: relative;
+  height: 22px;
+
+  .bubble-txt {
+    display: inline-block;
+    border: 1px solid #e8e8e8;
+    border-radius: 25px;
+    padding: 2px 8px;
+    font-size: 12px;
+    color: #41332D;
+    background-color: white;
     position: absolute;
-    top: 0;
-    right: 0;
-    border: inherit;
-    float: right;
-    border-radius: 0 25px 25px 0;
+    text-align: center;
+    width: fit-content;
   }
-}
 
-.tag {
-  display: inline-block;
-  border: 1px solid #e8e8e8;
-  border-radius: 25px;
-  padding: 2px 8px;
-  font-size: 12px;
-  color: #41332D;
-  background-color: white;
-  position: relative;
-  text-align: center;
-  transform: translate(-50%, 0);
-  margin-bottom: 6px;
-  z-index: 999;
-}
+  .bubble-arrow:before,.bubble-arrow:after{
+    content:"";
+    display:block;
+    border-width:5px;
+    position:absolute;
+    bottom: -31px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-style:solid dashed dashed;
+    border-color:#e8e8e8 transparent transparent;
+    font-size:0;
+    line-height:0;
+  }
+  .bubble-arrow:after{
+    bottom: -29px;
+    border-color:#FFF transparent transparent;
+  }
 
-.tag:before,.tag:after{
-  content:"";
-  display:block;
-  border-width:5px;
-  position:absolute;
-  bottom:-10px;
-  left: 50%;
-  transform: translate(-50%, 0);
-  border-style:solid dashed dashed;
-  border-color:#e8e8e8 transparent transparent;
-  font-size:0;
-  line-height:0;
-}
-.tag:after{
-  bottom: -8px;
-  border-color:#FFF transparent transparent;
+  .bubble-arrow {
+    position: absolute;
+  }
+
+
 }

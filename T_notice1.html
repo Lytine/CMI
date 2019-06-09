@@ -17,7 +17,7 @@
 <div class="nav-bar-wrapper" id="nav-app">
     <div class="nav-bg">
         <div class="content-wrapper">
-            <img src="img/logo.png"style="padding-top:40px;" /></div>
+            <img src="img/logo.png" style="padding-top:40px;"/></div>
     </div>
     <div class="nav-menu" id="navMenu">
         <ul class="content-wrapper">
@@ -85,7 +85,7 @@
 <!--suspension 在线客服 end-->
 
 <!--content start-->
-<div class="content-wrapper" id="cmi-app">
+<div class="content-wrapper" id="notice-app">
     <!--公告搜索面板-->
     <div class="search-panel">
         <ul class="tab">
@@ -149,7 +149,7 @@
     <!--公告内容面板-->
     <div class="notice-list" id="bids">
         <div v-for="(item,index) in bidsPage.rows" class="notice-item" :class="index % 4 == 0 ? '' : 'margin-lf-20'"
-             @click="open(item.PublicId,item.Id)">
+             @click="open(item.Id)">
             <div class="notice-Info">
                 <h1 class="project-name">
                     {{item.Title}}
@@ -168,28 +168,32 @@
                 <div class="notice-countdown" v-if="getStatus(item) == '0' ">
                     <span class="time-tips">距离报名开始时间:</span>
                     <p class="display-time">
-                        <lytine-progress :height="10" :time-start="getPeriod(item).start" :time-end="getPeriod(item).end"></lytine-progress>
+                        <lytine-progress :height="10" :time-start="getPeriod(item).start"
+                                         :time-end="getPeriod(item).end"></lytine-progress>
                     </p>
                     <span class="time-start">即将开始</span>
                 </div>
                 <div class="notice-countdown" v-if="getStatus(item) == '1' ">
                     <span class="time-tips">距离报名结束时间:</span>
                     <p class="display-time">
-                        <lytine-progress :height="10" :time-start="getPeriod(item).start" :time-end="getPeriod(item).end"></lytine-progress>
+                        <lytine-progress :height="10" :time-start="getPeriod(item).start"
+                                         :time-end="getPeriod(item).end"></lytine-progress>
                     </p>
                     <span class="time-doing">进行中</span>
                 </div>
                 <div class="notice-countdown" v-if="getStatus(item) == '2' ">
                     <span class="time-tips">距离竞价开始时间:</span>
                     <p class="display-time">
-                        <lytine-progress :height="10" :time-start="getPeriod(item).start" :time-end="getPeriod(item).end"></lytine-progress>
+                        <lytine-progress :height="10" :time-start="getPeriod(item).start"
+                                         :time-end="getPeriod(item).end"></lytine-progress>
                     </p>
                     <span class="time-start">即将开始</span>
                 </div>
                 <div class="notice-countdown" v-if="getStatus(item) == '3' ">
                     <span class="time-tips">距离竞价开始时间:</span>
                     <div class="display-time">
-                        <lytine-progress :height="10" :time-start="getPeriod(item).start" :time-end="getPeriod(item).end"></lytine-progress>
+                        <lytine-progress :height="10" :time-start="getPeriod(item).start"
+                                         :time-end="getPeriod(item).end"></lytine-progress>
                     </div>
                     <span class="time-doing">进行中</span>
                 </div>
@@ -208,7 +212,8 @@
                 <div class="notice-countdown" v-if="getStatus(item) == '0' ">
                     <span class="time-tips">距离报名开始时间:</span>
                     <p class="display-time">
-                        <lytine-progress :height="10" :time-start="getPeriod(item).start" :time-end="getPeriod(item).end"></lytine-progress>
+                        <lytine-progress :height="10" :time-start="getPeriod(item).start"
+                                         :time-end="getPeriod(item).end"></lytine-progress>
                     </p>
                     <span class="time-start">即将开始</span>
                 </div>
@@ -287,10 +292,10 @@
 <script src="plugins/moment.min.js"></script>
 <script src="js/vue.js"></script>
 <script src="js/axios.js"></script>
+<script src="js/commons.js"></script>
 <script src="component/LytineProgress/lytine-progress.js"></script>
 <script src="./plugins/element-ui/index.js"></script>
-<script src="js/Lytine_notice_config.js"></script>
-<script src="js/Lytine_notice.js"></script>
+<script src="js/Lytine_notice1.js"></script>
 <script src="js/Lytine_nav.js"></script>
 <script src="js/CustomerService.js"></script>
 </body>
